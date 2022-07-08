@@ -12,7 +12,7 @@ module Limiter
 
     def setup
       super
-      @queue = DistributedQueue.new(RATE, interval: INTERVAL)
+      @queue = DistributedQueue.new(RATE, "Limiter::DistributedQueueTest", interval: INTERVAL)
       @queue.stubs(:clock).returns(FakeClock)
     end
 
@@ -38,7 +38,7 @@ module Limiter
 
     def test_block_was_called_on_rate_limit
       @block_hit = false
-      @queue = DistributedQueue.new(RATE, interval: INTERVAL) { @block_hit = true }
+      @queue = DistributedQueue.new(RATE, "Limiter::DistributedQueueTest", interval: INTERVAL) { @block_hit = true }
       @queue.stubs(:clock).returns(FakeClock)
       @queue.shift
       @queue.shift

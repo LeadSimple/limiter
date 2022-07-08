@@ -2,11 +2,11 @@
 
 module Limiter
   module Mixin
-    def limit_method(method, rate:, interval: 60, balanced: false, distributed: true, &b)
+    def limit_method(method, rate:, key: "#{self.name}##{method}", interval: 60, balanced: false, distributed: true, &b)
       queue = if !distributed
                 RateQueue.new(rate, interval: interval, balanced: balanced, &b)
               else
-                DistributedQueue.new(rate, interval: interval, key: "#{self.name}##{method}", &b)
+                DistributedQueue.new(rate, key, interval: interval, &b)
               end
 
       mixin = Module.new do
