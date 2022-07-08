@@ -11,6 +11,7 @@ module Limiter
       @size = size
       @key = key
       @default = default
+      @already_initialized = false
     end
 
     def head

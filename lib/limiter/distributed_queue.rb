@@ -2,7 +2,7 @@
 
 module Limiter
   class DistributedQueue < BaseQueue
-    def initialize(size, interval: 60, key: 'queue', &blk)
+    def initialize(size, key, interval: 60, &blk)
       @ring = Ring.new(size, key, EPOCH)
       @interval = interval
       @blk = blk
