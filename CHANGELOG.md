@@ -1,11 +1,15 @@
 # CHANGELOG
-​
+
+## v3.2.0
+
+- Add an alias `#check!` method to be called in the queues instead of `shift`
+
 ## v3.1.0
-​
+
 - Set a more specific queue default name for redis-based queues
 
 ## v3.0.1
-​
+
 - Stop calling Redis on initialization
 
 ## v3.0.0

@@ -8,6 +8,12 @@ module Limiter
       raise ArgumentError, "This method should be implemented in a child class"
     end
 
+    # Sometimes we will use the queues directly to check for rate limits,
+    # and calling `#shift` doesn't make much sense when we are talking
+    # from a rate limit point of view - it only makes sense if we know the underlying
+    # building block is based in a Ring data structure
+    alias :check! :shift
+
     private
 
     def sleep_until(time, clock_time = Proc.new { clock.time })
