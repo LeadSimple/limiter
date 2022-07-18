@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module Limiter
   class BaseQueue
+    extend Forwardable
+
     EPOCH = 0.0
 
     def shift
@@ -12,7 +16,7 @@ module Limiter
     # and calling `#shift` doesn't make much sense when we are talking
     # from a rate limit point of view - it only makes sense if we know the underlying
     # building block is based in a Ring data structure
-    alias :check! :shift
+    def_delegator :self, :shift, :check!
 
     private
 
