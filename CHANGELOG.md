@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.2.1
+
+- Properly alias `#check!` method to be called in the queues instead of `shift` by using [`forwardable`](https://ruby-doc.org/stdlib-2.6.3/libdoc/forwardable/rdoc/Forwardable.html)
+
 ## v3.2.0
 
 - Add an alias `#check!` method to be called in the queues instead of `shift`

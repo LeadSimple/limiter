@@ -24,6 +24,14 @@ module Limiter
       end
     end
 
+    def test_check_is_aliased_to_shift
+      assert_elapsed(COUNT.to_f / RATE - 1) do
+        COUNT.times do
+          @queue.check!
+        end
+      end
+    end
+
     def test_shift_is_rate_limited_across_multiple_threads
       assert_elapsed(COUNT.to_f / RATE - 1) do
         threads = Array.new(COUNT) do
