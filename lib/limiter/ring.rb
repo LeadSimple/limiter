@@ -11,7 +11,7 @@ module Limiter
     end
 
     def initialize(size, key, default)
-      @redis = config.redis || Redis.new
+      @redis = Ring.config.redis || Redis.new
       @redlock = Redlock::Client.new([@redis])
       @size = size
       @key = key
