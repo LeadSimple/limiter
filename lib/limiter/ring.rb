@@ -5,13 +5,27 @@ require 'redlock'
 
 module Limiter
   class Ring
+    
+    class Config
+      attr_accessor :redis
+    end
+
     def initialize(size, key, default)
-      @redis = Redis.new
+      @redis = config.redis || Redis.new
       @redlock = Redlock::Client.new([@redis])
       @size = size
       @key = key
       @default = default
       @already_initialized = false
+    end
+
+    def self.configure
+      yield config
+      config
+    end
+
+    def self.config
+      @@config ||= Config.new
     end
 
     def head
