@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v3.3.0
+
+- Add a new `Ring#configure` method allowing you to set a specific Redis instance to be used by `limiter`
+-
+
 ## v3.2.1
 
 - Properly alias `#check!` method to be called in the queues instead of `shift` by using [`forwardable`](https://ruby-doc.org/stdlib-2.6.3/libdoc/forwardable/rdoc/Forwardable.html)
